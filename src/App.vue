@@ -1,60 +1,72 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
+      <v-app>
+      <v-navigation-drawer 
+       v-model="drawer"
+        absolute
+        temporary
+        app clipped>
+        <v-list>
+          <v-list-item :to="{path: '/'}">
+            <v-list-item-action>
+              <v-icon>mdi-{{ icons[0] }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>                    
+           <v-list-item :to="{path: '/buyers'}">
+            <v-list-item-action>
+              <v-icon>mdi-{{ icons[1] }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Buyers</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{path: '/buyer-information'}">
+            <v-list-item-action>
+              <v-icon>mdi-{{ icons[2] }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Buyer Information</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <v-card class="mx-auto overflow-hidden" height="100%" width="100%">
+       <v-system-bar color="deep-purple darken-3"></v-system-bar>      
+      <v-app-bar class="deep-purple accent-4 white--text">
+      <v-app-bar-nav-icon @click="drawer=true" class="white--text"></v-app-bar-nav-icon>
+        <v-toolbar-title>                
+        <v-list-item :to="{path: '/'}">                
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
           transition="scale-transition"
-          width="40"
+          width="40"         
+          :to="{path: '/'}" 
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+        </v-list-item>
+        </v-toolbar-title>
+      </v-app-bar>      
+      <v-main>
+        <v-container fluid>
+          <v-fade-transition mode="out-in">
+            <router-view></router-view>
+          </v-fade-transition>
+        </v-container>
+      </v-main>  
+      </v-card>    
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
   name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
+  data: () => ({    
+    drawer: false,
+    icons: ['home','shopping','email'],
   }),
 };
 </script>
