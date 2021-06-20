@@ -25,7 +25,7 @@
                 <td>{{buyer.id}}</td>
                 <td>{{buyer.name}}</td>
                 <td>{{buyer.age}}</td>
-                <td><v-btn :to="{name:'BuyerInformation'}" class="mx-2" fab dark color="indigo">
+                <td><v-btn :to="{name:'BuyerInformation', params:{id:buyer.id}}" class="mx-2" fab dark color="indigo">
          <v-icon dark>mdi-eye</v-icon>
        </v-btn></td>
             </tr>
