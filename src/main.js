@@ -20,7 +20,7 @@ const routes = [
   {path:'/', component:Home},
   {path:'/home', component:Home},
   {path:'/buyers', component:Buyers},
-  {path:'/buyer-information/:id', component:BuyerInformation, name:'BuyerInformation'}
+  {path:'/buyer-information/:uid', name:'BuyerInformation', component:BuyerInformation}
 ]
 
 const router = new VueRouter({
