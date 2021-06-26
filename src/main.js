@@ -8,6 +8,8 @@ import Home from './components/Home'
 import Buyers from './components/Buyers'
 import BuyerInformation from './components/BuyerInformation'
 
+import './assets/styles.css';
+
 Vue.component('Home', Home)
 Vue.component('Buyers', Buyers)
 Vue.component('BuyerInformation', BuyerInformation)
