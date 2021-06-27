@@ -10,7 +10,7 @@
  
         <v-row class="text-center">
             <v-col cols="12" class="offset">
-                <v-simple-table fixed-header class="elevation-3">
+                <!-- <v-simple-table fixed-header class="elevation-3">
                     <template v-slot:default>
                         <thead>
                             <tr>
@@ -35,8 +35,8 @@
                             </tr>
                         </tbody>
                     </template>
-                </v-simple-table>
-                <nav aria-label="Page navigation example">
+                </v-simple-table> -->
+                <!-- <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <div class="page-item">
                             <v-btn type="button" class="page-link" v-if="page != 1" 
@@ -56,7 +56,18 @@
                             class="page-link"> Next </v-btn>
                         </div>
                     </ul>
-                </nav>
+                </nav> -->
+                <v-data-table v-if="buyers.length > 0"
+                :headers="headers"
+                :items="buyers"
+                :items-per-page="5">
+                <template v-slot:[`item.actions`]="{ item }">
+                    <v-btn @click="getInformation(item)" 
+                    class="mx-2" fab dark color="indigo">
+                        <v-icon dark>mdi-eye</v-icon>
+                    </v-btn>
+                </template>
+                </v-data-table>
             </v-col>
         </v-row>
     </v-container>
@@ -73,10 +84,21 @@
             return{            
                 // buyers:null,
                 uid: null,
-                buyers : [''],
-                page: 1,
+                buyers : {},
+                /* page: 1,
                 perPage: 9,
-                pages: [],  
+                pages: [], */
+                headers: [
+                {
+                    text: 'ID',
+                    align: 'start',
+                    sortable: false,
+                    value: 'uid',
+                },
+                { text: 'Name', value: 'name' },
+                { text: 'Age', value: 'age' },
+                { text: '', value: 'actions', sortable: false }
+                ],
             }
         },
         methods:{
@@ -89,7 +111,15 @@
                     console.log(error);
                 })
             },
-            setPages() {
+            getInformation(item){
+                this.$router.push({
+                    name: 'BuyerInformation',
+                    params: {
+                        uid: item.uid
+                    }
+                });
+            },
+            /* setPages() {
                 let numberOfPages = Math.ceil(this.buyers.length / this.perPage);
                 for (let index = 1; index <= numberOfPages; index++) {
                     this.pages.push(index);
@@ -101,9 +131,9 @@
                 let from = (page * perPage) - perPage;
                 let to = (page * perPage);
                 return  buyers.slice(from, to);
-            }
+            } */
         },
-        computed: {
+        /* computed: {
             displayedBuyers () {
             return this.paginate(this.buyers);
             }
@@ -120,6 +150,6 @@
             trimWords(value){
             return value.split(" ").splice(0,20).join(" ") + '...';
             }
-        }
+        } */
     }
 </script>
