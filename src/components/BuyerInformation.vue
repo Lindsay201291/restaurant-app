@@ -32,7 +32,7 @@
                 :items-per-page="5">
                 <template v-slot:[`item.purchaseList`]="{ item }">
                     <ul v-for="purchase in item.purchases" :key="purchase.ip">
-                        <li>Date: {{new Date(purchase.date*1000)}}</li>
+                        <li>Date: {{formatDate(purchase.date*1000)}}</li>
                         <li>IP: {{purchase.ip}}</li>
                         <p>Products:</p>
                         <ul v-for="product in purchase.includes" :key="product.price">
@@ -51,6 +51,7 @@ export default {
     name: 'BuyerInformation',
     mounted(){
       this.id = this.$route.params.uid;
+      this.getPurchaseHistory();
       /* console.log(this.$route);
       console.log(this.id); */
     },
@@ -80,8 +81,7 @@ export default {
     methods:{
       getSelectedOption(){
           this.purchaseHistory = {};
-          if (this.select.abbr == 'IP') {
-              console.log("Seleccionó IP");
+          if (this.select.abbr == 'PH') {
               this.getPurchaseHistory();
           }
           // console.log(this.select.abbr);
@@ -94,6 +94,13 @@ export default {
             .catch(function(error){
                 console.log(error);
             });
+        },
+        formatDate(timestamp) {
+            var date = new Date(timestamp);
+            var dateAsStr = date.getDate()+
+          "/"+(date.getMonth()+1)+
+          "/"+date.getFullYear();
+          return dateAsStr;
         }
     }
 }
