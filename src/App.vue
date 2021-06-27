@@ -1,6 +1,6 @@
 <template>
       <v-app>
-      <v-navigation-drawer 
+      <v-navigation-drawer :width="275"
        v-model="drawer"
         absolute
         temporary
@@ -22,14 +22,14 @@
               <v-list-item-title>Buyers</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <!-- <v-list-item :to="{path: '/buyer-information'}">
+          <v-list-item :to="{path: '/transactions-of-the-day'}">
             <v-list-item-action>
               <v-icon>mdi-{{ icons[2] }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Buyer Information</v-list-item-title>
+              <v-list-item-title>Transactions of the Day</v-list-item-title>
             </v-list-item-content>
-          </v-list-item> -->
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-card class="mx-auto overflow-hidden" height="100%" width="100%">
@@ -66,7 +66,7 @@ export default {
   name: 'App',
   data: () => ({    
     drawer: false,
-    icons: ['home','shopping','email'],
+    icons: ['home','human','shopping-search'],
   }),
 };
 </script>
