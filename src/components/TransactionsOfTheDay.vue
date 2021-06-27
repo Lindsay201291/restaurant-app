@@ -12,6 +12,11 @@
                 :headers="headers"
                 :items="transactions"
                 :items-per-page="5">
+                <template v-slot:[`item.productList`]="{ item }">
+                    <ul v-for="product in item.includes" :key="product.uid">
+                      <li>{{product.name}}</li>
+                    </ul>
+                </template>
             </v-data-table>
         </v-row>
     </v-container>
@@ -33,6 +38,7 @@ import axios from 'axios';
           { text: 'Ip', value: 'ip' },
           { text: 'Device', value: 'device' },
           { text: 'Products', value: 'includes.length' },
+          { text: '', value: 'productList', sortable: false }
         ],
       transactions: {},
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
