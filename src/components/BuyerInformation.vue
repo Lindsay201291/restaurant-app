@@ -42,6 +42,19 @@
                 </template>
             </v-data-table>
         </v-row>
+
+        <v-row justify="center">
+            <v-data-table v-if="buyersWithTheSameIp.length > 0"
+                :headers="headersForIP"
+                :items="buyersWithTheSameIp"
+                :items-per-page="5">
+                <!-- <template v-slot:[`item.ipList`]="{ item }">
+                    <ul v-for="i in item.c" :key="i.ip">
+                        <li>{{i.ip}}</li>
+                    </ul>
+                </template> -->
+            </v-data-table>
+        </v-row>
     </v-container>
 </template>
 
@@ -65,6 +78,7 @@ export default {
           { state: 'Product recommendations', abbr: 'PR' },
         ],
         purchaseHistory: {},
+        buyersWithTheSameIp: {},
         headersForPH: [
           {
             text: 'Name',
@@ -76,13 +90,29 @@ export default {
           { text: 'Purchases', value: 'purchases.length' },
           { text: '', value: 'purchaseList', sortable: false }
         ],
+        headersForIP: [
+          {
+            text: 'Name',
+            align: 'start',
+            sortable: false,
+            value: 'customer.name',
+          },
+          // { text: 'IP', value: 'ipList', sortable: false }
+          { text: 'IP', value: 'customer.c[0].ip', sortable: false }
+        ],
       }
     },
     methods:{
       getSelectedOption(){
           this.purchaseHistory = {};
+          this.buyersWithTheSameIp = {};
+
           if (this.select.abbr == 'PH') {
               this.getPurchaseHistory();
+          }
+
+          if (this.select.abbr == 'IP') {
+              this.getBuyersWithTheSameIp();
           }
           // console.log(this.select.abbr);
       },
@@ -90,6 +120,15 @@ export default {
             axios.get('http://localhost:3000/buyer/'+this.id+'/purchase-history')
             .then(r => {
                 this.purchaseHistory = r.data.purchase_history;
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+        },
+        getBuyersWithTheSameIp() {
+            axios.get('http://localhost:3000/buyer/'+this.id+'/same-ip')
+            .then(r => {
+                this.buyersWithTheSameIp = r.data.q;
             })
             .catch(function(error){
                 console.log(error);
