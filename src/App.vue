@@ -42,9 +42,10 @@
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="./assets/rapp-logo.png"
           transition="scale-transition"
-          width="40"         
+          width="45"
+          height="45"       
           :to="{path: '/'}" 
         />
         </v-list-item>

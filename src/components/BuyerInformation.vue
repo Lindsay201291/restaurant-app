@@ -55,6 +55,19 @@
                 </template> -->
             </v-data-table>
         </v-row>
+
+        <v-row justify="center">
+            <v-data-table v-if="productRecomendations.length > 0"
+                :headers="headersForPR"
+                :items="productRecomendations"
+                :items-per-page="5">
+                <template v-slot:[`item.productList`]="{ item }">
+                    <ul v-for="product in item.includes" :key="product.uid">
+                      <li>{{product.name}}</li>
+                    </ul>
+                </template>
+            </v-data-table>
+        </v-row>
     </v-container>
 </template>
 
@@ -79,6 +92,7 @@ export default {
         ],
         purchaseHistory: {},
         buyersWithTheSameIp: {},
+        productRecomendations: {},
         headersForPH: [
           {
             text: 'Name',
@@ -100,19 +114,29 @@ export default {
           // { text: 'IP', value: 'ipList', sortable: false }
           { text: 'IP', value: 'customer.c[0].ip', sortable: false }
         ],
+        headersForPR: [
+          {
+            text: 'Name',
+            align: 'start',
+            sortable: false,
+            value: 'customer.name',
+          },
+          { text: 'Products', value: 'productList', sortable: false }
+        ],
       }
     },
     methods:{
       getSelectedOption(){
           this.purchaseHistory = {};
           this.buyersWithTheSameIp = {};
+          this.productRecomendations = {};
 
           if (this.select.abbr == 'PH') {
               this.getPurchaseHistory();
-          }
-
-          if (this.select.abbr == 'IP') {
+          } else if (this.select.abbr == 'IP') {
               this.getBuyersWithTheSameIp();
+          } else if (this.select.abbr == 'PR') {
+              this.getProductRecomendations();
           }
           // console.log(this.select.abbr);
       },
@@ -129,6 +153,15 @@ export default {
             axios.get('http://localhost:3000/buyer/'+this.id+'/same-ip')
             .then(r => {
                 this.buyersWithTheSameIp = r.data.q;
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+        },
+        getProductRecomendations() {
+            axios.get('http://localhost:3000/buyer/'+this.id+'/product-recomendations')
+            .then(r => {
+                this.productRecomendations = r.data.q;
             })
             .catch(function(error){
                 console.log(error);
