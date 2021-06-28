@@ -22,6 +22,14 @@
               <v-list-item-title>Buyers</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item :to="{path: '/products-of-the-day'}">
+            <v-list-item-action>
+              <v-icon>mdi-{{ icons[4] }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Products of the Day</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item :to="{path: '/buyers-of-the-day'}">
             <v-list-item-action>
               <v-icon>mdi-{{ icons[2] }}</v-icon>
@@ -75,7 +83,7 @@ export default {
   name: 'App',
   data: () => ({    
     drawer: false,
-    icons: ['home','account-group', 'account-search', 'cash-register'],
+    icons: ['home','account-group', 'account-search', 'cash-register', 'shopping-search'],
   }),
 };
 </script>
