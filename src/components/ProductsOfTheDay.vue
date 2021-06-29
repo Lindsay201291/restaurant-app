@@ -38,7 +38,7 @@ import axios from 'axios';
 
     methods: {
       getProductsOfTheDay (date) {
-        date = date +":21:56:46";
+        date = date +":00:00:00";
         console.log(`Selected date: ${date}`);
         this.timestamp = Date.parse(date)/1000;
         console.log("Timestamp "+this.timestamp);

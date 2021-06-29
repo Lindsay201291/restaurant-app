@@ -106,7 +106,7 @@ export default {
         ],
         headersForIP: [
           {
-            text: 'Name',
+            text: 'Buyer',
             align: 'start',
             sortable: false,
             value: 'customer.name',

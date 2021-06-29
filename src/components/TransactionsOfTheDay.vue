@@ -35,7 +35,7 @@ import axios from 'axios';
             sortable: false,
             value: 'customer.name',
           },
-          { text: 'Ip', value: 'ip' },
+          { text: 'IP', value: 'ip' },
           { text: 'Device', value: 'device' },
           { text: 'Products', value: 'includes.length' },
           { text: '', value: 'productList', sortable: false }
@@ -46,7 +46,7 @@ import axios from 'axios';
 
     methods: {
       getTransactionsOfTheDay (date) {
-        date = date +":21:56:46";
+        date = date +":00:00:00";
         console.log(`Selected date: ${date}`);
         this.timestamp = Date.parse(date)/1000;
         console.log("Timestamp "+this.timestamp);
