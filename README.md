@@ -25,4 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ![](https://i.imgur.com/6XHeplY.png)
 
-![](https://i.imgur.com/bKUnTbP.png)
+![](https://i.imgur.com/LWVDCec.png)
